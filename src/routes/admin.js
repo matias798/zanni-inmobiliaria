@@ -18,5 +18,13 @@ router.post('/login', adminController.Verificacionlogin);
 
 
 
+/***************************/ 
+/*   Panel administrador   */ 
+/**************************/ 
+
+
+/* Panel administrador*/
+router.get('/panel', adminController.panel);
+/* /Panel administrador*/
 
 module.exports = router;
