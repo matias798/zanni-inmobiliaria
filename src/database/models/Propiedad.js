@@ -55,8 +55,8 @@ foreignKey:"role_id"
 
 
 
-    propiedades.belongsTo(models.operacion,{
-    as:"operacion",
+    propiedades.belongsTo(models.operaciones,{
+    as:"operaciones",
     foreignKey:"rolee_id"
     
         })

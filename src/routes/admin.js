@@ -19,12 +19,28 @@ router.post('/login', adminController.Verificacionlogin);
 
 
 /***************************/ 
-/*   Panel administrador   */ 
-/**************************/ 
+/*   Panel administrador  */ 
+/*************************/ 
 
 
 /* Panel administrador*/
 router.get('/panel', adminController.panel);
 /* /Panel administrador*/
+
+
+
+
+/* Crear propiedad*/
+router.get('/crear',adminController.crear);
+/* Crear propiedad*/
+
+
+/* Crear propiedad*/
+router.post('/crear-propiedad',adminController.crearPropiedad);
+/* Crear propiedad*/
+
+/* borrrar propiedad*/
+router.post('/borrar/:id',adminController.deleteById);
+/* borrrar propiedad*/
 
 module.exports = router;

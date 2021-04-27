@@ -5,11 +5,11 @@
   </head>
   <body>
     <section>
-        <div  style="width:90%;display: flex;flex-direction: column;margin:1em auto;">
+        <div  style="widpropiedadth:90%;display: flex;flex-direction: column;margin:1em auto;">
             <h1 style="align-self: flex-start;">propiedados de la plataforma</h1>
-            <a class="btn btn-primary"  style="align-self: flex-end;" href="/propiedads/create">Crear un nuevo propiedado</a>
+            <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear un nuevo propiedado</a>
         </div>
-        <div style="width: 90%;background-color: white;margin:0 auto;">
+        <div style="widpropiedadth: 90%;background-color: white;margin:0 auto;">
             <table class="table table-striped">
                 <tr>
                     <th>Nombre</th>
@@ -18,20 +18,21 @@
                     <th>Borrar</th>
                 </tr>
                 <% for (let i = 0;i < propiedad.length; i ++ ) {%>
-                <tr>
+                    <tr>
 
                     <td><%= propiedad[i].titulo%></td>
                     <td><%= propiedad[i].descripcion%></td>
+
                     <td>
-                        <a class="btn btn-secondary" href="/propiedad[i]./edit/<%= propiedad[i].id%>">Editar</a>
+                        <a class="btn btn-secondary" href="/propiedad[i]./edit/<%= propiedad[i].idpropiedad%>">Editar</a>
                     </td>
                     <td>
-                        <form action="/propiedad[i]./<%= propiedad.id%>?_method=DELETE" method="POST" style="padding:0;margin:0">
-                            <button type="submit"  class="btn btn-danger">Eliminar</button>
+                        <form action="/admin/borrar/<%= propiedad[i].idpropiedad%>" method="POST" style="padding:0;margin:0">
+                           <button type="submit"  class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>
                 </tr>
-                <br>
+
                 <%} %>
             </table>
         </div>

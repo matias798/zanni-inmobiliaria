@@ -10,7 +10,7 @@ let adminController = {
 login: function (req, res) {
 
 // Renderizamos vista de login
-    res.render('create');
+    res.render('login');
    
 },
 /* /login de usuario administrador */ 
@@ -34,14 +34,14 @@ if (admin.contraseña == req.body.password ){
 req.session.admin = true;
 
 // Dirigo a ruta de panel de control de usuario 
- res.redirect('/panel');
+ res.redirect('/admin/panel');
 
 }
 // Si no matchea la contraseña
    else{
    
 // Redirigo a login 
-      res.redirect('/incia-sesion');
+      res.redirect('/admin/incia-sesion');
    }
    
 })
@@ -77,7 +77,7 @@ db.propiedades.findAll()
   .then(
     propiedad=>{
   // Renderizamos vista de panel de control del admin
-  res.render('panelAdmin',{propiedad});
+  res.render('panelAdmin',{propiedad});s
     })
 
 
@@ -107,6 +107,134 @@ db.propiedades.findAll()
   
 
 
+
+
+
+/* Crear propiedad*/
+crear: function (req, res) {
+
+//Busco todas las categorias 
+db.categorias.findAll()
+
+.then(categorias=>{
+
+
+
+// Busco todas las operaciones
+db.operaciones.findAll()
+
+.then(operacion=>{
+
+  res.render('crear',{categorias,operacion})
+})
+
+
+})
+
+.catch(error=>{
+  console.log(error);
+})
+  
+},
+/* /Crear propiedad*/
+
+
+
+
+/* Crear propiedad*/
+crearPropiedad: function (req, res) {
+
+
+
+  
+  db.propiedades.create({
+              idadmin:"1",
+              titulo:req.body.titulo,
+              descripcion:req.body.Descripcion,
+              habitaciones:req.body.habitaciones,
+              baños:req.body.baños,
+              dormitorios:req.body.dormitorios,
+              direccion:req.body.direccion,
+              precio:req.body.precio,
+              imagen_principal:"ddd",
+              role_id:"1"
+            },
+            
+            
+            )
+          
+            .then(propiedad=>{res.redirect('/')
+        console.log(req.body)
+        })
+          
+            /*En caso de error lo atrapamos */ 
+            .catch(
+            error=>{
+    // Muestro error por consola
+    console.log(error);
+    
+    // Redirigimos a inicio
+    res.redirect('/')
+    })
+
+  },
+
+
+
+
+
+
+
+
+
+// // Creo la propiedad
+// db.propiedades.create(
+//   {
+//     titulo:req.body.titulo,
+//     descripcion:req.body.Descripcion,
+//     habitaciones:req.body.habitaciones,
+//     baños:req.body.baños,
+//     dormitorios:req.body.dormitorios,
+//     direccion:req.body.direccion,
+//     precio:req.body.precio,
+//     role_id:"1",
+//     rolee_id:"1",
+//     imagen_principal:"bs",
+//   }
+// )
+
+// .then((propiedad) => {
+// res.send(propiedad)
+// // res.render("create", { categorias: categorias });
+// })
+
+// .catch((error) => {
+// // muestro el error por consola
+// console.log(error);
+
+// // Redirecciono a productos
+// res.redirect("/incia-sesion");
+//   })
+  
+
+/* borrrar propiedad*/
+deleteById: (req, res) => {
+  db.propiedades
+    .destroy({
+      where: {
+        idpropiedad: req.params.id,
+      },
+    })
+    .then((result) => {
+      res.redirect("/admin/panel");
+    })
+
+    .catch((error) => {
+      console.log(error);
+      res.redirect("/panel");
+    });
+},
+/* /borrrar propiedad*/
 
 
 }
