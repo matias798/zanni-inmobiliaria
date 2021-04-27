@@ -11,7 +11,6 @@ login: function (req, res) {
 
 // Renderizamos vista de login
     res.render('login');
-   
 },
 /* /login de usuario administrador */ 
 
@@ -59,10 +58,6 @@ req.session.admin = true;
 /* /Atrapo el error*/ 
 },
 
-
-
-
-
 /* Panel administrador*/
 panel: function (req, res) {
 
@@ -77,7 +72,7 @@ db.propiedades.findAll()
   .then(
     propiedad=>{
   // Renderizamos vista de panel de control del admin
-  res.render('panelAdmin',{propiedad});s
+  res.render('panelAdmin',{propiedad});
     })
 
 
@@ -96,7 +91,7 @@ db.propiedades.findAll()
   }
   else{
 // Redirigo a login 
-      res.redirect('/incia-sesion');
+      res.redirect('/admin/incia-sesion');
    
   }
   
@@ -104,11 +99,6 @@ db.propiedades.findAll()
 
   },
 /* Panel administrador*/
-  
-
-
-
-
 
 /* Crear propiedad*/
 crear: function (req, res) {
@@ -117,8 +107,6 @@ crear: function (req, res) {
 db.categorias.findAll()
 
 .then(categorias=>{
-
-
 
 // Busco todas las operaciones
 db.operaciones.findAll()
@@ -181,43 +169,84 @@ crearPropiedad: function (req, res) {
 
 
 
+  /* Editar mediant8e get */
+editar: (req, res) => {
 
+  // Busco todas las propiedades 
+  db.propiedades.findOne(
+    {where:{idpropiedad:req.params.id}},
+     {
+      // Busco categorias y asociaciones
+      include:[{association:"categorias"},{association:"operaciones"}]
+    }
+  )
 
+.then((propiedad) => {
 
-
-
-
-// // Creo la propiedad
-// db.propiedades.create(
-//   {
-//     titulo:req.body.titulo,
-//     descripcion:req.body.Descripcion,
-//     habitaciones:req.body.habitaciones,
-//     baños:req.body.baños,
-//     dormitorios:req.body.dormitorios,
-//     direccion:req.body.direccion,
-//     precio:req.body.precio,
-//     role_id:"1",
-//     rolee_id:"1",
-//     imagen_principal:"bs",
-//   }
-// )
-
-// .then((propiedad) => {
-// res.send(propiedad)
-// // res.render("create", { categorias: categorias });
-// })
-
-// .catch((error) => {
-// // muestro el error por consola
-// console.log(error);
-
-// // Redirecciono a productos
-// res.redirect("/incia-sesion");
-//   })
+  // Busco todas las categorias 
+  db.categorias.findAll()
   
+  .then(categorias=>{
+  
+  // Busco todas las operaciones
+  db.operaciones.findAll()
+  
+  .then(operacion=>{
 
-/* borrrar propiedad*/
+    // Declaro variable parametro 
+    let parametro = req.params.id;
+
+    res.render('editar',{propiedad,categorias,operacion,parametro})
+    
+  })
+  
+  
+  })
+
+})
+
+ .catch((error) => {
+ // muestro el error por consola
+ console.log(error);
+ 
+ // Redirecciono a productos
+ res.redirect("/incia-sesion");
+    })
+
+},
+  /* Editar mediante get */
+
+/* Editar propiedad mediante post*/
+editarPropiedad: (req, res) => {
+  db.propiedades.update(
+    { titulo:req.body.titulo,
+      descripcion:req.body.Descripcion,
+      habitaciones:req.body.habitaciones,
+      baños:req.body.baños,
+      dormitorios:req.body.dormitorios,
+      direccion:req.body.direccion,
+      precio:req.body.precio,
+      imagen_principal:"ddd",
+    }
+,    {
+      where: {
+        idpropiedad: req.params.id,
+      },
+    })
+    .then((result) => {
+      res.redirect("/admin/panel");
+    })
+
+    .catch((error) => {
+      console.log(error);
+      res.redirect("/admin/panel");
+    });
+},
+/* Editar propiedad mediante post*/
+
+
+/* Borrar propiedad mediante post*/
+
 deleteById: (req, res) => {
   db.propiedades
     .destroy({
@@ -234,7 +263,8 @@ deleteById: (req, res) => {
       res.redirect("/panel");
     });
 },
-/* /borrrar propiedad*/
+/* /Borrar propiedad mediante post*/
+
 
 
 }

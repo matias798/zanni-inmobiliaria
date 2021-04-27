@@ -34,10 +34,21 @@ router.get('/panel', adminController.panel);
 router.get('/crear',adminController.crear);
 /* Crear propiedad*/
 
-
 /* Crear propiedad*/
 router.post('/crear-propiedad',adminController.crearPropiedad);
 /* Crear propiedad*/
+
+
+/*    EDITAR       */
+
+/* editar propiedad*/
+router.get('/editar/:id',adminController.editar);
+/* editar propiedad*/
+
+/* editar propiedad*/
+router.post('/editar-propiedad/:id',adminController.editarPropiedad);
+/* editar propiedad*/
+
 
 /* borrrar propiedad*/
 router.post('/borrar/:id',adminController.deleteById);

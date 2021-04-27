@@ -5,11 +5,11 @@
   </head>
   <body>
     <section>
-        <div  style="widpropiedadth:90%;display: flex;flex-direction: column;margin:1em auto;">
+        <div  style="display: flex;flex-direction: column;margin:1em auto;">
             <h1 style="align-self: flex-start;">propiedados de la plataforma</h1>
             <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear un nuevo propiedado</a>
         </div>
-        <div style="widpropiedadth: 90%;background-color: white;margin:0 auto;">
+        <div style="background-color: white;margin:0 auto;">
             <table class="table table-striped">
                 <tr>
                     <th>Nombre</th>
@@ -24,7 +24,7 @@
                     <td><%= propiedad[i].descripcion%></td>
 
                     <td>
-                        <a class="btn btn-secondary" href="/propiedad[i]./edit/<%= propiedad[i].idpropiedad%>">Editar</a>
+                        <a class="btn btn-secondary" href="/admin/editar/<%= propiedad[i].idpropiedad%>">Editar</a>
                     </td>
                     <td>
                         <form action="/admin/borrar/<%= propiedad[i].idpropiedad%>" method="POST" style="padding:0;margin:0">
