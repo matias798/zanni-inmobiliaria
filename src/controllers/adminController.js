@@ -136,7 +136,6 @@ crearPropiedad: function (req, res) {
 
   
   db.propiedades.create({
-              idadmin:"1",
               titulo:req.body.titulo,
               descripcion:req.body.Descripcion,
               habitaciones:req.body.habitaciones,
@@ -151,8 +150,7 @@ crearPropiedad: function (req, res) {
             
             )
           
-            .then(propiedad=>{res.redirect('/')
-        console.log(req.body)
+            .then(propiedad=>{res.redirect('/admin/panel')
         })
           
             /*En caso de error lo atrapamos */ 
