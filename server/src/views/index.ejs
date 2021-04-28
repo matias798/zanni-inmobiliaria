@@ -9,42 +9,129 @@
 
   <%- include('partials/header.ejs') %> 
 
+
+
+  <!-- Vacations -->
+  <section class="tiles">
+    <article class="style1">
+      <span class="image">
+        <img src="images/product-1-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        </p>
+      </a>
+    </article>
+    <article class="style2">
+      <span class="image">
+        <img src="images/product-2-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        </p>
+      </a>
+    </article>
+    <article class="style3">
+      <span class="image">
+        <img src="images/product-3-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        </p>
+      </a>
+    </article>
+
+    <article class="style4">
+      <span class="image">
+        <img src="images/product-4-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        </p>
+      </a>
+    </article>
+
+    <article class="style5">
+      <span class="image">
+        <img src="images/product-5-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        
+        </p>
+      </a>
+    </article>
+
+    <article class="style6">
+      <span class="image">
+        <img src="images/product-6-720x480.jpg" alt="" />
+      </span>
+      <a href="property-details.html">
+        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+        
+        <p><del>119 000</del> <strong>117 000</strong></p>
+
+        <p>
+          
+          House  &nbsp;|&nbsp;  For Sale  &nbsp;|&nbsp;  100 sq m  &nbsp;|&nbsp;  2010 <br>
+
+                            <i class="fa fa-bed"></i> Bedrooms: 4  &nbsp;|&nbsp;
+                            <i class="fa fa-tint"></i> Bathrooms: 4
+        
+        </p>
+      </a>
+    </article>
+  </section>
+
 <!-- card carousel 1 -->
 <div class="container"> 
 
-  <div class="jumbotron">
+  <div class="d-flex flex-wrap justify-content-center">
 
-<%for (let i= 0 ; i <  propiedad.length  ; i++ ){%>
-  <a  class="nounderline" href="/detalle/<%= propiedad[i].idpropiedad %>">
-
-    <div class="card rounded mb-4" style="padding-bottom: 10%;">  
+<%for (let i= 0 ; i <  6 ; i++ ){%>
+  
     
-        <!-- image -->
-    <div class="justifi-content-center pt-4">
-    </div>   
-    
-        <div>
-            <!-- Title -->
-            <h3 class="propiedad_card_text propiedad_card_text_mark green_font text-center pt-2 pb-2"><%= propiedad[i].titulo %> </h3>
-            <!-- /Title -->
-           
-    
-            <!-- summary -->
-            <p class="propiedad_card_text text-muted propiedadSummary"><%= propiedad[i].descripcion %></p>
-            <!-- /summary -->
-            
-    
-        <!-- Price -->
-            <p class="propiedad_card_text text-muted propiedad_card_text_mark propiedadSummary"> 
-            <span>$</span>
-            <%= propiedad[i].precio %>
-        </p>
-        <!-- /Price -->
-    </div>
-    </div>
-    </a>
-    
-
   <%}%>
 </div>
 </div>
