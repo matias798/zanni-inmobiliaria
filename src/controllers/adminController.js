@@ -20,45 +20,42 @@ login: function (req, res) {
 /* login de usuario administrador */ 
 Verificacionlogin: function (req, res) {
 
-
-res.send(req.body)
-
-// // Busca algun admin con igual email
-// db.admin.findOne({ where:{ email:req.body.email }})
+// Busca algun admin con igual email
+db.admin.findOne({ where:{ email:req.body.email }})
 
 
-// .then(admin=>{
+.then(admin=>{
 
-// // Si la contraseña es igual a la escrita en el formulario
-// if (admin.contraseña == req.body.password ){
+// Si la contraseña es igual a la escrita en el formulario
+if (admin.contraseña == req.body.password ){
       
-// //creo session de usuario administrador
-// req.session.admin = true;
+//creo session de usuario administrador
+req.session.admin = true;
 
-// // Dirigo a ruta de panel de control de usuario 
-//  res.redirect('/admin/panel');
+// Dirigo a ruta de panel de control de usuario 
+ res.redirect('/admin/panel');
 
-// }
-// // Si no matchea la contraseña
-//    else{
+}
+// Si no matchea la contraseña
+   else{
    
-// // Redirigo a login 
-//       res.redirect('/admin/incia-sesion');
-//    }
+// Redirigo a login 
+      res.redirect('/admin/incia-sesion');
+   }
    
-// })
+})
 
-// /* Atrapo el error*/ 
-// .catch(
-//   error=>{
-//     // muestro error por consola
-//     console.log(error);
+/* Atrapo el error*/ 
+.catch(
+  error=>{
+    // muestro error por consola
+    console.log(error);
  
-//    // Dirigo a inicio 
-//     res.redirect('/')
+   // Dirigo a inicio 
+    res.redirect('/')
  
-//  })
-// /* /Atrapo el error*/ 
+ })
+/* /Atrapo el error*/ 
 },
 
 /* Panel administrador*/

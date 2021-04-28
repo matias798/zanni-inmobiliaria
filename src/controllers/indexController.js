@@ -17,7 +17,7 @@ Indice: function (req, res) {
 
 .then((propiedad) => {
 // res.send(propiedad)
-res.render("index", { propiedad });
+res.send(propiedad)
 })
 
  .catch((error) => {
@@ -45,7 +45,7 @@ detalle: function (req, res) {
   )
 
 .then((propiedad) => {
-res.render('detallePropiedad',{propiedad})
+  res.send(propiedad)
 })
 
  .catch((error) => {
