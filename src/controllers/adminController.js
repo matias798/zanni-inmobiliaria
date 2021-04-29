@@ -144,7 +144,8 @@ crearPropiedad: function (req, res) {
               direccion:req.body.direccion,
               precio:req.body.precio,
               imagen_principal:"ddd",
-              role_id:"1"
+              role_id:req.body.category,
+              rolee_id:req.body.operacion
             },
             
             
