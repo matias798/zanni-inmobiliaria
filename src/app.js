@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session= require('express-session')
+var cors = require('cors');
+
 
 var adminRouter = require('./routes/admin');
 var indexRouter = require('./routes/index');
@@ -16,6 +18,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({secret:'keyboard cat',resave: true,
 saveUninitialized: true}));
