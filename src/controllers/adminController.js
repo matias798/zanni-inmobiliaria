@@ -167,7 +167,7 @@ crearPropiedad: function (req, res) {
 
 
 
-  /* Editar mediant8e get */
+  /* Editar mediante get */
 editar: (req, res) => {
 
   // Busco todas las propiedades 
@@ -225,6 +225,8 @@ editarPropiedad: (req, res) => {
       direccion:req.body.direccion,
       precio:req.body.precio,
       imagen_principal:"ddd",
+      role_id:req.body.category,
+      rolee_id:req.body.operacion
     }
 ,    {
       where: {

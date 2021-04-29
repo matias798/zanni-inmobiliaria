@@ -82,7 +82,7 @@
     <label class="labelName">Categoría</label>
     <select class="form-control" name="category">
       <% for(var i= 0; i< categorias.length; i++) { %>
-      <option name="<%=categorias[i].id_tipo_propiedad%>"><%=categorias[i].nombre%></option>
+      <option value="<%=categorias[i].id_tipo_propiedad%>"><%=categorias[i].nombre%></option>
       <% } %>
     </select>
   </div>
@@ -91,12 +91,12 @@
 
 
 
-<!-- Opercion -->
+<!-- Operacion -->
 <div class="form-group">
-    <label class="labelName">Categoría</label>
-    <select class="form-control" name="category">
+    <label class="labelName">operación</label>
+    <select class="form-control" name="operacion">
       <% for(var i= 0; i< operacion.length; i++) { %>
-      <option name="<%=categorias[i].idoperacion%>"><%=operacion[i].name%></option>
+      <option value="<%=operacion[i].idoperacion%>"><%=operacion[i].name%></option>
       <% } %>
     </select>
   </div>
