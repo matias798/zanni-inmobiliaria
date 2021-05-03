@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+
+    <title>Zanní</title>
+
+
   </head>
   <body>
     <section>
         <div  style="display: flex;flex-direction: column;margin:1em auto;">
-            <h1 style="align-self: flex-start;">propiedados de la plataforma</h1>
-            <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear una nueva propiedad</a>
+            <h1 style="align-self: center;">Propiedados de la plataforma</h1>
         </div>
         <div style="background-color: white;margin:0 auto;">
             <table class="table table-striped">
@@ -36,6 +45,10 @@
                 <%} %>
             </table>
         </div>
+
+        <div class="d-flex justify-content-end">
+        <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear una nueva propiedad</a>
+    </div>
     </section>
 
 
