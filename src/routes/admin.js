@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 let adminController= require('../controllers/adminController');
+
 
 /*******************************/ 
 /*    Ingreso administrador   */ 
@@ -53,5 +53,8 @@ router.post('/editar-propiedad/:id',adminController.editarPropiedad);
 /* borrrar propiedad*/
 router.post('/borrar/:id',adminController.deleteById);
 /* borrrar propiedad*/
+
+
+
 
 module.exports = router;

@@ -20,4 +20,5 @@ router.get('/propiedades/venta', indexController.venta);
 /* Propiedades en venta */
 
 
+
 module.exports = router;

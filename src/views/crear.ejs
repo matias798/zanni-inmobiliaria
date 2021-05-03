@@ -15,7 +15,7 @@
 <body class="page_background_color">
 
 
-      <form action="/admin/crear-propiedad" method="POST" >
+      <form action="/admin/crear-propiedad" method="POST" enctype="multipart/form-data" >
 
         <!-- jumbotron -->
         <div class="jumbotron">
@@ -104,6 +104,14 @@
 <!-- /Operacion -->
 
 
+
+<div class="form-group">
+  <label class="upload-images">Sube imagenes del producto
+    <input type="file" size="60" name="image" accept=".pdf,.jpg,.png" >
+</div>
+
+
+
 <div class="d-flex justify-content-center">
 
   <!-- Submit button  -->
@@ -125,6 +133,9 @@
 <!-- /Jumbotron -->
 
         </form>
+
+
+<button type="submit"></button>
 
 
 </body>
