@@ -132,7 +132,7 @@ db.operaciones.findAll()
 /* Crear propiedad*/
 crearPropiedad: function (req, res) {
 
-  
+  console.log(req.files);
   db.propiedades.create({
               titulo:req.body.titulo,
               descripcion:req.body.Descripcion,
@@ -141,7 +141,7 @@ crearPropiedad: function (req, res) {
               dormitorios:req.body.dormitorios,
               direccion:req.body.direccion,
               precio:req.body.precio,
-              imagen_principal:req.file.filename,
+              imagen_principal:"d",
               role_id:req.body.category,
               rolee_id:req.body.operacion
             },

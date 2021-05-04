@@ -62,6 +62,10 @@ foreignKey:"role_id"
         })
 
 
+        propiedades.hasMany(models.images, {
+            as: "images", 
+        })
+
 
 }
 

@@ -5,17 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session= require('express-session')
 var cors = require('cors');
-const multer = require('multer')
-
-
-const storage =multer.diskStorage({
-  destination:path.join(__dirname,'../public/images'  ),
- filename:(req,file,cb)=>{
-  cb(null,file.originalname)
- } 
-
-})
-
 
 
 var adminRouter = require('./routes/admin');
@@ -35,15 +24,6 @@ app.use(session({secret:'keyboard cat',resave: true,
 saveUninitialized: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public/')));
-app.use(multer({
-  storage,
-  dest:path.join(__dirname,'public/images'  ),
-
-
-}).single('image')
-
-)
-
 
 app.use('/admin', adminRouter);
 app.use('/', indexRouter);

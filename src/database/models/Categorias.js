@@ -21,4 +21,5 @@ categorias.associate = function (models) {
     })
 }
 
-return categorias}
+return categorias
+}

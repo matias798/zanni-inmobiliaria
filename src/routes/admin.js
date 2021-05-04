@@ -1,6 +1,19 @@
 var express = require('express');
 var router = express.Router();
 let adminController= require('../controllers/adminController');
+const multer = require('multer')
+const path =require('path');
+
+const storage =multer.diskStorage({
+    destination:path.join(__dirname,'../../public/images'  ),
+   filename:(req,file,cb)=>{
+    cb(null,file.originalname)
+   } 
+  
+  })
+
+
+const upload = multer({storage})
 
 
 /*******************************/ 
@@ -35,7 +48,7 @@ router.get('/crear',adminController.crear);
 /* Crear propiedad*/
 
 /* Crear propiedad*/
-router.post('/crear-propiedad',adminController.crearPropiedad);
+router.post('/crear-propiedad',upload.array('images'),adminController.crearPropiedad);
 /* Crear propiedad*/
 
 
