@@ -1,7 +1,6 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
-
-
+const { nanoid } = require('nanoid')
 let adminController = {
 
 
@@ -141,7 +140,7 @@ crearPropiedad: function (req, res) {
               dormitorios:req.body.dormitorios,
               direccion:req.body.direccion,
               precio:req.body.precio,
-              imagen_principal:"d",
+              imagen_principal:req.files[0].filename,
               role_id:req.body.category,
               rolee_id:req.body.operacion
             },
@@ -149,8 +148,40 @@ crearPropiedad: function (req, res) {
             
             )
           
-            .then(propiedad=>{res.redirect('/admin/panel')
-        })
+            .then(propiedad=>{
+              
+// Creo array para almacenar las imagenes
+              let arrayImages=[]
+
+// loop que inserta imagenes a el arrayimages
+              for(let i = 0 ;i < req.files.length;i++){
+                arrayImages.push(
+
+                  // creo datos para la tabla
+                  db.images.create({
+                  id:nanoid(),
+                  path:req.files[i].filename,
+                  propiedades_id:propiedad.idpropiedad
+                  }))
+
+
+                  Promise.all(arrayImages).then(() => {
+                    // Redirecciono a el panel
+                res.redirect('/admin/panel')
+
+                  })
+      
+                  // atrapo el error
+                  .catch((error) => {
+                    // muestro el error por consola
+                    console.log(error);
+      
+                    // Redirecciono a productos
+                    res.redirect("/propiedades");
+                  });
+                }
+
+            })
           
             /*En caso de error lo atrapamos */ 
             .catch(

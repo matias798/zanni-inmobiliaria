@@ -2,24 +2,27 @@ module.exports=function(sequelize,DataTypes){
     const images = sequelize.define("images", 
     
     {
-        idimages: {
+        id: {
             type: DataTypes.STRING(64),
             autoIncrement:true, 
-            primaryKey: true
+            primaryKey: true,
+            allowNull:true
         },
         path: {
             type: DataTypes.STRING(45),
             allowNull: false
         },
        
-    })
 
-    images.associate = function (models) {
+        propiedades_id: {
+            type: DataTypes.STRING(45),
+            allowNull: false
+        },
 
-    images.belongsTo(models.propiedades,{
-        as:"propiedades",
-        })
-    }
+    },{timestamps:false,
+        "underscored": true}
+    )
+
 
  return images
 

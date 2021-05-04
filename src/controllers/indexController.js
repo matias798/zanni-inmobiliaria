@@ -45,7 +45,16 @@ detalle: function (req, res) {
   )
 
 .then((propiedad) => {
-  res.json(propiedad)
+
+db.images.findAll({where:{propiedades_id:propiedad.idpropiedad}})
+
+.then( resp=>{res.send({propiedad,resp})})
+
+.catch(e=>{console.log(e);})
+  // res.json(propiedad)
+
+
+
 })
 
  .catch((error) => {

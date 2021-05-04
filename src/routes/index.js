@@ -3,13 +3,14 @@ var router = express.Router();
 let indexController= require('../controllers/indexController');
 
 
-/* indice de productos*/
-router.get('/', indexController.Indice);
-/* indice de productos*/
 
 /* detalle de productos*/
 router.get('/detalle/:id', indexController.detalle);
 /* detalle de productos*/
+
+/* indice de productos*/
+router.get('/propiedades', indexController.Indice);
+/* indice de productos*/
 
 /* Propiedades en alquiler */
 router.get('/propiedades/alquiler', indexController.alquiler);

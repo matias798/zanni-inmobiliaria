@@ -53,8 +53,6 @@ foreignKey:"role_id"
 
     })
 
-
-
     propiedades.belongsTo(models.operaciones,{
     as:"operaciones",
     foreignKey:"rolee_id"
@@ -62,9 +60,6 @@ foreignKey:"role_id"
         })
 
 
-        propiedades.hasMany(models.images, {
-            as: "images", 
-        })
 
 
 }
