@@ -59,7 +59,7 @@ router.get('/editar/:id',adminController.editar);
 /* editar propiedad*/
 
 /* editar propiedad*/
-router.post('/editar-propiedad/:id',adminController.editarPropiedad);
+router.post('/editar-propiedad/:id',upload.array('images'),adminController.editarPropiedad);
 /* editar propiedad*/
 
 

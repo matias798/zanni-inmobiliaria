@@ -13,7 +13,7 @@
 <body class="page_background_color">
 
 
-      <form action="/admin/editar-propiedad/<%= parametro%>" method="POST" >
+      <form action="/admin/editar-propiedad/<%= parametro%>" method="POST" enctype="multipart/form-data" >
 
         <!-- jumbotron -->
         <div class="jumbotron">
@@ -100,6 +100,15 @@
   </div>
   <div class="form-group">
 <!-- /Operacion -->
+
+
+<!-- images -->
+<div class="form-group">
+  <label class="upload-images">Sube imagenes del producto
+    <input type="file" size="60" name="images" accept=".pdf,.jpg,.png" multiple >
+</div>
+<!-- /images -->
+
 
 <div class="d-flex justify-content-center">
 

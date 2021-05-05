@@ -151,7 +151,8 @@ crearPropiedad: function (req, res) {
             .then(propiedad=>{
               
 // Creo array para almacenar las imagenes
-              let arrayImages=[]
+let arrayImages=[]
+
 
 // loop que inserta imagenes a el arrayimages
               for(let i = 0 ;i < req.files.length;i++){
@@ -263,14 +264,52 @@ editarPropiedad: (req, res) => {
         idpropiedad: req.params.id,
       },
     })
-    .then((result) => {
-      res.redirect("/admin/panel");
-    })
+      .then(propiedad=>{
+              
+// Borro imagenes en la base de datos
+db.images.destroy({where:{propiedades_id:req.params.id}})
 
-    .catch((error) => {
-      console.log(error);
-      res.redirect("/admin/panel");
-    });
+.then(resp=>{
+        
+  // Creo array para almacenar las imagenes
+        let arrayImages=[]
+        
+       arrayImages=arrayImages;
+        
+        // loop que inserta imagenes a el arrayimages
+                      for(let i = 0 ;i < req.files.length;i++){
+                        arrayImages.push(
+        
+                          // creo datos para la tabla de imagenes
+                          db.images.create({
+                          id:nanoid(),
+                          path:req.files[i].filename,
+                          propiedades_id:req.params.id
+                          }))
+        
+        
+                            // Redirecciono al panel de administrador
+                      return  res.redirect('/admin/panel');
+        
+                          
+              
+                        }
+        
+                    })
+                  
+                    /*En caso de error al crear datos de imagenes lo atrapamos */ 
+                    .catch(
+                    error=>{
+            // Muestro error por consola
+            console.log(error);
+            
+            // Redirigimos a inicio
+            res.redirect('/')
+            })
+          })
+
+
+
 },
 /* Editar propiedad mediante post*/
 
