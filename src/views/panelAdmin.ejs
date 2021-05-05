@@ -11,7 +11,6 @@
 
     <title>Zanní</title>
 
-
   </head>
   <body>
     <section>
@@ -36,8 +35,8 @@
                         <a class="btn btn-secondary" href="/admin/editar/<%= propiedad[i].idpropiedad%>">Editar</a>
                     </td>
                     <td>
-                        <form action="/admin/borrar/<%= propiedad[i].idpropiedad%>" method="POST" style="padding:0;margin:0">
-                           <button type="submit"  class="btn btn-danger">Eliminar</button>
+                        <form  class="forms" action="/admin/borrar/<%= propiedad[i].idpropiedad%>" method="POST" style="padding:0;margin:0">
+                           <button type="submit"   onclick="sendAlert()" class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>
                 </tr>
@@ -50,7 +49,39 @@
         <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear una nueva propiedad</a>
     </div>
     </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script> 
+
+let sendForm = document.querySelector("form.forms");
+// Evento de enviar formulario
+sendForm.addEventListener('submit',function(e){
+e.preventDefault();
+
+});
 
 
+    function sendAlert(){
+        Swal.fire({
+  title: 'Estas seguro que queres borrar esta propiedad?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: `si!`,
+  denyButtonText: `No!`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire('se borro con exito!','', 'success')
+    sendForm.submit();
+
+  } else if (result.isDenied) {
+    Swal.fire('No se borro la propiedad', '', 'info')
+  }
+})  
+    
+    }
+
+
+
+    </script>
   </body>
 </html>
