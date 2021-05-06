@@ -277,13 +277,13 @@ db.images.destroy({where:{propiedades_id:req.params.id}})
 .then(resp=>{
         
   // Creo array para almacenar las imagenes
-        let arrayImages=[]
+        let Images=[]
         
-       arrayImages=arrayImages;
         
-        // loop que inserta imagenes a el arrayimages
+        // loop que inserta imagenes a el Images
                       for(let i = 0 ;i < req.files.length;i++){
-                        arrayImages.push(
+                        console.log(req.files[i].filename);
+                        Images.push(
         
                           // creo datos para la tabla de imagenes
                           db.images.create({
@@ -293,13 +293,13 @@ db.images.destroy({where:{propiedades_id:req.params.id}})
                           }))
         
         
-                            // Redirecciono al panel de administrador
-                      return  res.redirect('/admin/panel');
         
                           
               
                         }
         
+                            // Redirecciono al panel de administrador
+                            res.redirect('/admin/panel');
                     })
                   
                     /*En caso de error al crear datos de imagenes lo atrapamos */ 
@@ -309,7 +309,7 @@ db.images.destroy({where:{propiedades_id:req.params.id}})
             console.log(error);
             
             // Redirigimos a inicio
-            res.redirect('/')
+            res.redirect('/admin/login')
             })
           })
 
