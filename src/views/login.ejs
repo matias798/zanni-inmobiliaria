@@ -40,12 +40,22 @@
             <input class="form-control mt-4" type="password" name="password"  />
           </div>
     
+          <!-- Aviso de no matcheo -->
+           <% if (aviso != undefined) { %>  
+          <div class="text-center text-danger"><%=aviso%> </div>          
+          <% } %> 
+          <!-- Aviso de no matcheo -->
+                      
+
           <div class="d-flex justify-content-end">
-        <input type="submit" class="btn btn-primary" value="crear" />
+        <input type="submit" class="btn btn-primary" value="Login" />
       </div>
 
           </div>
-      </form>
+
+
+      
+        </form>
 
 
 </body>

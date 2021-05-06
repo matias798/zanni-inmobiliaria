@@ -8,8 +8,9 @@ let adminController = {
 /* login de usuario administrador */ 
 login: function (req, res) {
 
-// Renderizamos vista de login
-    res.render('login');
+  let aviso = undefined;
+  // Renderizamos vista de login
+    res.render('login',{aviso});
 },
 /* /login de usuario administrador */ 
 
@@ -37,9 +38,11 @@ req.session.admin = true;
 }
 // Si no matchea la contraseña
    else{
-   
-// Redirigo a login 
-      res.redirect('/admin/incia-sesion');
+   let aviso= 'el usuario o la contraseña no son correctas'
+
+   // Renderizo login 
+   res.render('login',{aviso});
+
    }
    
 })
@@ -50,8 +53,10 @@ req.session.admin = true;
     // muestro error por consola
     console.log(error);
  
-   // Dirigo a inicio 
-    res.redirect('/')
+    let aviso= 'El usuario o la contraseña no son correctas'
+
+    // Renderizo login 
+    res.render('login',{aviso});
  
  })
 /* /Atrapo el error*/ 
