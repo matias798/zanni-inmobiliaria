@@ -260,7 +260,7 @@ editarPropiedad: (req, res) => {
       dormitorios:req.body.dormitorios,
       direccion:req.body.direccion,
       precio:req.body.precio,
-      imagen_principal:"ddd",
+      imagen_principal:req.files[0].filename,
       role_id:req.body.category,
       rolee_id:req.body.operacion
     }
