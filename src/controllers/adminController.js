@@ -1,6 +1,14 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
 const { nanoid } = require('nanoid')
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name:'dsoeo0zhi',
+  api_key:'899347544757772',
+  api_secret:'8M0dPqtAnK9GEm4m-YkSwkm3F7A'
+})
+
+
 let adminController = {
 
 
@@ -134,10 +142,13 @@ db.operaciones.findAll()
 
 
 /* Crear propiedad*/
-crearPropiedad: function (req, res) {
+crearPropiedad: async function (req, res) {
+  try{
+    const result = await cloudinary.v2.uploader.upload(req.files[0].path)
+    const url= await result.url;
 
-  console.log(req.files);
-  db.propiedades.create({
+    /* Creating a property with the attributes  */ 
+ db.propiedades.create({
               titulo:req.body.titulo,
               descripcion:req.body.Descripcion,
               habitaciones:req.body.habitaciones,
@@ -145,60 +156,78 @@ crearPropiedad: function (req, res) {
               dormitorios:req.body.dormitorios,
               direccion:req.body.direccion,
               precio:req.body.precio,
-              imagen_principal:req.files[0].filename,
+              imagen_principal: url ,
               role_id:req.body.category,
               rolee_id:req.body.operacion
-            },
-            
-            
-            )
-          
-            .then(propiedad=>{
-              
-// Creo array para almacenar las imagenes
-let arrayImages=[]
-
-
-// loop que inserta imagenes a el arrayimages
-              for(let i = 0 ;i < req.files.length;i++){
-                arrayImages.push(
-
-                  // creo datos para la tabla
-                  db.images.create({
-                  id:nanoid(),
-                  path:req.files[i].filename,
-                  propiedades_id:propiedad.idpropiedad
-                  }))
-
-
-                  Promise.all(arrayImages).then(() => {
-                    // Redirecciono a el panel
-                res.redirect('/admin/panel')
-
-                  })
-      
-                  // atrapo el error
-                  .catch((error) => {
-                    // muestro el error por consola
-                    console.log(error);
-      
-                    // Redirecciono a productos
-                    res.redirect("/propiedades");
-                  });
-                }
-
             })
-          
-            /*En caso de error lo atrapamos */ 
-            .catch(
-            error=>{
-    // Muestro error por consola
-    console.log(error);
-    
-    // Redirigimos a inicio
-    res.redirect('/')
+
+.then( (propiedad)=>{
+
+  // Assync Function created for creating the data about all the images in the database and in cloudinary
+  async function UploadImages() {
+
+/* Declaring variables */ 
+let results;
+let onlineId;
+const arrayimage=[];
+
+// Loop for the length of the files uploaded
+for(let i = 0; i < req.files.length; i ++ )
+
+{
+  // upload the file to cloudinary
+  results = await cloudinary.v2.uploader.upload(req.files[i].path)
+  onlineId= await results.public_id;//id of file in cloudinary
+             
+arrayimage.push( 
+
+// Inserting data to the myqsl
+  db.images.create({
+    id:nanoid(),
+    path:onlineId,  
+    propiedades_id:propiedad.idpropiedad
     })
 
+// If it haves problems inserting data to mysql image table 
+    .catch(e=>{
+      console.log(e);
+      
+      res.redirect('/admin/panel')
+    })
+)
+
+}
+//  Busca las propiedades
+db.propiedades.findAll()
+
+.then(
+  propiedad=>{
+// Renderizamos vista de panel de control del admin
+res.render('panelAdmin',{propiedad});
+  })
+
+  /* Atrapo el error*/ 
+.catch(
+error=>{
+  // muestro error por consola
+  console.log(error);
+
+ // Dirigo a inicio 
+  res.redirect('/')
+
+})          
+}
+
+
+UploadImages();
+})
+
+// In case of having an error uploading the property
+}catch (error) {
+console.log(error);
+               
+res.redirect('/admin/inicia-sesion')
+              }
   },
 
 

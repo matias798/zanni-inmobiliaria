@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session= require('express-session')
 var cors = require('cors');
+var cloudinary = require('cloudinary');
+
 
 
 var adminRouter = require('./routes/admin');
@@ -22,6 +24,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({secret:'keyboard cat',resave: true,
 saveUninitialized: true}));
+cloudinary.config({
+  cloud_name:'dsoeo0zhi',
+  api_key:'899347544757772',
+  api_secret:'8M0dPqtAnK9GEm4m-YkSwkm3F7A'
+})
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public/')));
 
