@@ -278,9 +278,17 @@ editar: (req, res) => {
 
 },
   /* Editar mediante get */
+  
 
 /* Editar propiedad mediante post*/
-editarPropiedad: (req, res) => {
+editarPropiedad: async (req, res) => {
+
+  try{
+    const result = await cloudinary.v2.uploader.upload(req.files[0].path)
+    const url= await result.url;
+
+    /* Creating a property with the attributes  */ 
+
   db.propiedades.update(
     { titulo:req.body.titulo,
       descripcion:req.body.Descripcion,
@@ -289,7 +297,7 @@ editarPropiedad: (req, res) => {
       dormitorios:req.body.dormitorios,
       direccion:req.body.direccion,
       precio:req.body.precio,
-      imagen_principal:req.files[0].filename,
+      imagen_principal: url ,
       role_id:req.body.category,
       rolee_id:req.body.operacion
     }
@@ -303,33 +311,53 @@ editarPropiedad: (req, res) => {
 // Borro imagenes en la base de datos
 db.images.destroy({where:{propiedades_id:req.params.id}})
 
-.then(resp=>{
-        
-  // Creo array para almacenar las imagenes
-        let Images=[]
-        
-        
-        // loop que inserta imagenes a el Images
-                      for(let i = 0 ;i < req.files.length;i++){
-                        console.log(req.files[i].filename);
-                        Images.push(
-        
-                          // creo datos para la tabla de imagenes
-                          db.images.create({
-                          id:nanoid(),
-                          path:req.files[i].filename,
-                          propiedades_id:req.params.id
-                          }))
-        
-        
-        
-                          
-              
-                        }
-        
-                            // Redirecciono al panel de administrador
-                            res.redirect('/admin/panel');
-                    })
+.then( (propiedad)=>{
+
+  // Assync Function created for creating the data about all the images in the database and in cloudinary
+  async function UploadImages() {
+
+/* Declaring variables */ 
+let results;
+let onlineId;
+const arrayimage=[];
+
+// Loop for the length of the files uploaded
+for(let i = 0; i < req.files.length; i ++ )
+
+{
+  // upload the file to cloudinary
+  results = await cloudinary.v2.uploader.upload(req.files[i].path)
+  onlineId= await results.public_id;//id of file in cloudinary
+             
+arrayimage.push( 
+// Inserting data to the myqsl
+db.images.create({
+  id:nanoid(),
+  path:onlineId,  
+  propiedades_id:req.params.id
+  })
+
+
+// If it haves problems inserting data to mysql image table 
+    .catch(e=>{
+      console.log(e);
+      
+      res.redirect('/admin/panel')
+    })
+)
+
+}
+// Renderizamos vista de panel de control del admin
+res.redirect('/admin/panel')
+
+ // Dirigo a inicio 
+
+}
+
+
+UploadImages();
+})
+
                   
                     /*En caso de error al crear datos de imagenes lo atrapamos */ 
                     .catch(
@@ -344,6 +372,13 @@ db.images.destroy({where:{propiedades_id:req.params.id}})
 
 
 
+// In case of having an error uploading the property
+}catch (error) {
+  console.log(error);
+                 
+  res.redirect('/admin/inicia-sesion')
+                }
+                
 },
 /* Editar propiedad mediante post*/
 
