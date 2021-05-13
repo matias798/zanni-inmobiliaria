@@ -73,10 +73,7 @@ req.session.admin = true;
 /* Panel administrador*/
 panel: function (req, res) {
 
-// Si existe una sesionn de administrador
-  let isAdmin = req.session.admin
 
-  if(isAdmin){
 
 //  Busca las propiedades
 db.propiedades.findAll()
@@ -100,12 +97,6 @@ db.propiedades.findAll()
  })
 /* /Atrapo el error*/ 
 
-  }
-  else{
-// Redirigo a login 
-      res.redirect('/admin/incia-sesion');
-   
-  }
   
 
 
@@ -137,9 +128,6 @@ db.operaciones.findAll()
   
 },
 /* /Crear propiedad*/
-
-
-
 
 /* Crear propiedad*/
 crearPropiedad: async function (req, res) {
@@ -197,25 +185,10 @@ arrayimage.push(
 )
 
 }
-//  Busca las propiedades
-db.propiedades.findAll()
-
-.then(
-  propiedad=>{
-// Renderizamos vista de panel de control del admin
-res.render('panelAdmin',{propiedad});
-  })
-
-  /* Atrapo el error*/ 
-.catch(
-error=>{
-  // muestro error por consola
-  console.log(error);
 
  // Dirigo a inicio 
-  res.redirect('/')
+  res.redirect('/admin/panel')
 
-})          
 }
 
 
@@ -227,7 +200,8 @@ UploadImages();
 console.log(error);
                
 res.redirect('/admin/inicia-sesion')
-              }
+
+}
   },
 
 
@@ -366,7 +340,7 @@ UploadImages();
             console.log(error);
             
             // Redirigimos a inicio
-            res.redirect('/admin/login')
+            res.redirect('/admin/inicia-sesion')
             })
           })
 
@@ -386,6 +360,8 @@ UploadImages();
 /* Borrar propiedad mediante post*/
 
 deleteById: (req, res) => {
+
+
   db.propiedades
     .destroy({
       where: {
@@ -398,7 +374,7 @@ deleteById: (req, res) => {
 
     .catch((error) => {
       console.log(error);
-      res.redirect("/panel");
+      res.redirect("/admin/incia-sesion");
     });
 },
 /* /Borrar propiedad mediante post*/

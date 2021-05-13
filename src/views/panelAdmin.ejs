@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
 
     <title>Zanní</title>
 
@@ -23,7 +24,10 @@
                     <th>Nombre</th>
                     <th>Resumen</th>
                     <th>Editar</th>
-                    <th>Borrar</th>
+                    <th>Eliminar</th>
+                  <span class='d-flex justify-content-end m-3' >
+                      <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear"><i class="fa fa-plus" aria-hidden="true"> Crear propiedad</i></a>
+                  </span>
                 </tr>
                 <% for (let i = 0;i < propiedad.length; i ++ ) {%>
                     <tr>
@@ -32,11 +36,12 @@
                     <td><%= propiedad[i].descripcion%></td>
 
                     <td>
-                        <a class="btn btn-secondary" href="/admin/editar/<%= propiedad[i].idpropiedad%>">Editar</a>
+                        <a class="btn btn-secondary" href="/admin/editar/<%= propiedad[i].idpropiedad%>"><i class="far fa-edit"></i></a>
                     </td>
                     <td>
                         <form  class="forms" action="/admin/borrar/<%= propiedad[i].idpropiedad%>" method="POST" style="padding:0;margin:0">
-                           <button type="button"   onclick="sendAlert()" class="btn btn-danger">Eliminar</button>
+                           <button type="submit"   onclick="return confirm('Seguro que quieres eliminarlo?')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                           </button>
                         </form>
                     </td>
                 </tr>
@@ -45,43 +50,7 @@
             </table>
         </div>
 
-        <div class="d-flex justify-content-end">
-        <a class="btn btn-primary"  style="align-self: flex-end;" href="/admin/crear">Crear una nueva propiedad</a>
-    </div>
+        
     </section>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script> 
-
-let sendForm = document.querySelector("form.forms");
-// Evento de enviar formulario
-sendForm.addEventListener('submit',function(e){
-e.preventDefault();
-
-});
-
-
-    function sendAlert(){
-        Swal.fire({
-  title: 'Estas seguro que queres borrar esta propiedad?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: `si!`,
-  denyButtonText: `No!`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    Swal.fire('se borro con exito!','', 'success')
-    sendForm.submit();
-
-  } else if (result.isDenied) {
-    Swal.fire('No se borro la propiedad', '', 'info')
-  }
-})  
-    
-    }
-
-
-
-    </script>
-  </body>
+</body>
 </html>
