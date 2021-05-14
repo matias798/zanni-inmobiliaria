@@ -5,5 +5,4 @@
 usuario admin:"admin1"
 password:"admin1234"
 
-proyecto de inmobiliaria el cual permite a un usuario administrador utilizar un crud el cual se utiliza en pagina web de react, sus datos estan almacenados en mysql
-y las imagenes en cloudinary.
+Proyecto de inmobiliaria el cual permite a un usuario administrador utilizar un crud el cual se consume a través de un fetch en pagina web de Reactjs, sus datos estan almacenados en mysql y las imagenes en cloudinary.
